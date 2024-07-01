@@ -6,7 +6,7 @@
 /*   By: kfukuhar <kfukuhar@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 10:59:22 by kfukuhar          #+#    #+#             */
-/*   Updated: 2024/04/30 15:25:02 by kfukuhar         ###   ########.fr       */
+/*   Updated: 2024/04/27 16:34:12 by kfukuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,13 @@ static int	ft_isset(char const c, char const *set)
 
 static char	*get_empty_str(void)
 {
-	return (ft_strdup(""));
+	char	*str;
+
+	str = (char *)malloc(1);
+	if (str == NULL)
+		return (NULL);
+	str[0] = '\0';
+	return (str);
 }
 
 static char	*ft_alloc_strtrim(char const *s1, size_t i_head, size_t i_tail)

@@ -6,7 +6,7 @@
 /*   By: kfukuhar <kfukuhar@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 16:04:02 by kfukuhar          #+#    #+#             */
-/*   Updated: 2024/06/14 15:35:30 by kfukuhar         ###   ########.fr       */
+/*   Updated: 2024/04/26 13:58:08 by kfukuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,8 +99,6 @@ char	**ft_split(char const *s, char c)
 	if (s == NULL)
 		return (NULL);
 	num_words = count_tokens(s, c);
-	if (num_words == 0)
-		return (NULL);
 	split_words = (char **)malloc((num_words + 1) * sizeof(char *));
 	if (split_words == NULL)
 		return (NULL);

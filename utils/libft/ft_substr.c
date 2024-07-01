@@ -6,7 +6,7 @@
 /*   By: kfukuhar <kfukuhar@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 10:49:53 by kfukuhar          #+#    #+#             */
-/*   Updated: 2024/04/30 15:25:40 by kfukuhar         ###   ########.fr       */
+/*   Updated: 2024/04/27 16:34:57 by kfukuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,13 @@
 
 static char	*get_empty_str(void)
 {
-	return (ft_strdup(""));
+	char	*str;
+
+	str = (char *)malloc(1);
+	if (str == NULL)
+		return (NULL);
+	str[0] = '\0';
+	return (str);
 }
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)

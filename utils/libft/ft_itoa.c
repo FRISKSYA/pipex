@@ -6,7 +6,7 @@
 /*   By: kfukuhar <kfukuhar@student.42tokyo.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 17:47:55 by kfukuhar          #+#    #+#             */
-/*   Updated: 2024/04/30 15:22:39 by kfukuhar         ###   ########.fr       */
+/*   Updated: 2024/04/27 16:25:06 by kfukuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,15 @@ static size_t	ft_isminus(int n)
 		return (0);
 }
 
+static char	*ft_itoa_malloc(char *dst, size_t digits, size_t is_minus)
+{
+	if (is_minus == 1)
+		dst = (char *)malloc((digits + 2) * sizeof(char));
+	else
+		dst = (char *)malloc((digits + 1) * sizeof(char));
+	return (dst);
+}
+
 static void	ft_alloc_digits_to_str(char *dst, long int n, size_t digits)
 {
 	while (digits > 0)
@@ -56,7 +65,7 @@ char	*ft_itoa(int n)
 	is_minus = ft_isminus(n);
 	ln = (long)n;
 	str = NULL;
-	str = (char *)malloc((digits + 1 + is_minus) * sizeof(char));
+	str = ft_itoa_malloc(str, digits, is_minus);
 	if (str == NULL)
 		return (NULL);
 	if (is_minus == 1)

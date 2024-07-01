@@ -28,7 +28,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	@$(MAKE) -C $(PRINTF_DIR)
-	@$(MAKE) -C $(LIBFT_DIR)
+	@$(MAKE) bonus -C $(LIBFT_DIR)
 	@$(MAKE) -C $(GNL_DIR)
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(PRINTF) $(LIBFT) $(GNL)
 
