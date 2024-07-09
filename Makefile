@@ -6,13 +6,13 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
 # Directories
-SRCS_DIR = ./srcs
-PRINTF_DIR = ./utils/ft_printf
-LIBFT_DIR = ./utils/libft
-GNL_DIR = ./utils/get_next_line
+SRCS_DIR = ./src
+PRINTF_DIR = ./util/ft_printf
+LIBFT_DIR = ./util/libft
+GNL_DIR = ./util/get_next_line
 
 # Source files
-SRCS_FILES = pipex.c
+SRCS_FILES = pipex.c ft_init_pipex.c ft_cleanup.c ft_check_args.c ft_exit.c
 SRCS = $(addprefix $(SRCS_DIR)/, $(SRCS_FILES))
 
 # Object files
@@ -31,6 +31,16 @@ $(NAME): $(OBJS)
 	@$(MAKE) bonus -C $(LIBFT_DIR)
 	@$(MAKE) -C $(GNL_DIR)
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(PRINTF) $(LIBFT) $(GNL)
+
+gdb: $(OBJS)
+	@$(MAKE) -C $(PRINTF_DIR)
+	@$(MAKE) bonus -C $(LIBFT_DIR)
+	@$(MAKE) -C $(GNL_DIR)
+	gcc $(CFLAGS) -o $(NAME) $(OBJS) $(PRINTF) $(LIBFT) $(GNL) -g
+
+#  --show-leak-kinds=all --track-origins=yes
+valgrind: gdb
+	valgrind --leak-check=full ./pipex
 
 clean:
 	$(RM) $(OBJS)
