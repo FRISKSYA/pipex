@@ -6,7 +6,7 @@
 /*   By: kfukuhar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 17:03:19 by kfukuhar          #+#    #+#             */
-/*   Updated: 2024/07/08 19:18:48 by kfukuhar         ###   ########.fr       */
+/*   Updated: 2024/07/09 20:16:08 by kfukuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ typedef enum	s_pipex_error
 
 // main
 void	ft_init_pipex(t_pipex *data);
-int		ft_check_args(int argc, char **argv);
+int		ft_check_args(int argc, char **argv, t_pipex *data);
 int		ft_parse_cmds(t_pipex *data);
 int		ft_parse_args(t_pipex *data);
 int		ft_exec(t_pipex *data);

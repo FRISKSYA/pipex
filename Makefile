@@ -40,7 +40,7 @@ gdb: $(OBJS)
 
 #  --show-leak-kinds=all --track-origins=yes
 valgrind: gdb
-	valgrind --leak-check=full ./pipex
+	valgrind --leak-check=full ./pipex infile 2 3 outfile
 
 clean:
 	$(RM) $(OBJS)

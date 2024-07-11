@@ -6,7 +6,7 @@
 /*   By: kfukuhar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 19:00:00 by kfukuhar          #+#    #+#             */
-/*   Updated: 2024/07/09 20:53:29 by kfukuhar         ###   ########.fr       */
+/*   Updated: 2024/07/10 12:29:52 by kfukuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	ft_check_args(int argc, char **argv, t_pipex *data)
 	if (argc != 5)
 		return (ARGS_ERROR);
 	i = 0;
-	if (access(argv[++i], F_OK | R_OK))
+	if (access(argv[++i], R_OK))
 		data->is_invalid_infile = true;//ft_exit("INFILE_ACCESS_ERROR");
 	else
 		data->in_fd = open(argv[i], O_RDONLY);
@@ -31,13 +31,8 @@ int	ft_check_args(int argc, char **argv, t_pipex *data)
 	while (i++ < argc - 2) ft_printf("%s\n", argv[i]);
 	flags = O_WRONLY | O_CREAT | O_TRUNC;
 	mode = S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH;
-	if (!access(argv[i], F_OK | R_OK))
-	{
-		data->out_fd = open(argv[i], flags, mode);
-		if (!data->out_fd)
-			ft_exit("OUTFILE_OPEN_ERROR");
-	}
-	else
-		ft_exit("OUTFILE_ACCESS_ERROR");
+	data->out_fd = open(argv[i], flags, mode);
+	if (data->out_fd < 0)
+		ft_exit("OUTFILE_OPEN_ERROR");
 	return (SUCCESS);
 }
