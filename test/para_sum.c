@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   para_sum.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kfukuhar <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kfukuhar <kfukuhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 16:30:55 by kfukuhar          #+#    #+#             */
-/*   Updated: 2024/06/29 17:16:29 by kfukuhar         ###   ########.fr       */
+/*   Updated: 2024/07/09 20:13:58 by kfukuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../includes/pipex.h"
+# include "../include/pipex.h"
 
 int	main(int argc, char **argv)
 {

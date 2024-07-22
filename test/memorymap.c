@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   memorymap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kfukuhar <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kfukuhar <kfukuhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 18:37:55 by kfukuhar          #+#    #+#             */
-/*   Updated: 2024/06/27 18:43:35 by kfukuhar         ###   ########.fr       */
+/*   Updated: 2024/07/09 20:13:52 by kfukuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../includes/pipex.h"
+# include "../include/pipex.h"
 
 extern char	**environ;
 

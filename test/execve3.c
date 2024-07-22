@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   execve3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kfukuhar <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kfukuhar <kfukuhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 13:18:42 by kfukuhar          #+#    #+#             */
-/*   Updated: 2024/06/28 13:24:18 by kfukuhar         ###   ########.fr       */
+/*   Updated: 2024/07/09 20:13:40 by kfukuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../includes/pipex.h"
+# include "../include/pipex.h"
 
 extern char **environ;
 

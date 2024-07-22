@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   execve_fail.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kfukuhar <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kfukuhar <kfukuhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 13:30:44 by kfukuhar          #+#    #+#             */
-/*   Updated: 2024/06/28 13:39:53 by kfukuhar         ###   ########.fr       */
+/*   Updated: 2024/07/09 20:13:06 by kfukuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../includes/pipex.h"
+# include "../include/pipex.h"
 
 extern char	**environ;
 

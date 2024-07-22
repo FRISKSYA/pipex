@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_sim.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kfukuhar <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kfukuhar <kfukuhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 17:40:31 by kfukuhar          #+#    #+#             */
-/*   Updated: 2024/06/29 18:05:36 by kfukuhar         ###   ########.fr       */
+/*   Updated: 2024/07/09 20:14:01 by kfukuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../includes/pipex.h"
+# include "../include/pipex.h"
 
 extern char	**environ;
 

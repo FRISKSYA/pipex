@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   my_system.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kfukuhar <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kfukuhar <kfukuhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 15:34:31 by kfukuhar          #+#    #+#             */
-/*   Updated: 2024/06/28 15:35:17 by kfukuhar         ###   ########.fr       */
+/*   Updated: 2024/07/09 20:13:55 by kfukuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../includes/pipex.h"
+# include "../include/pipex.h"
 
 int	main(void)
 {

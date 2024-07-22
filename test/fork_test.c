@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   fork_test.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kfukuhar <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kfukuhar <kfukuhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 17:38:10 by kfukuhar          #+#    #+#             */
-/*   Updated: 2024/07/06 17:50:07 by kfukuhar         ###   ########.fr       */
+/*   Updated: 2024/07/09 20:13:47 by kfukuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/pipex.h"
+#include "../include/pipex.h"
 
 int	main(void)
 {
