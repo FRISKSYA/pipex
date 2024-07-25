@@ -6,7 +6,7 @@
 /*   By: kfukuhar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 17:03:19 by kfukuhar          #+#    #+#             */
-/*   Updated: 2024/07/09 20:16:08 by kfukuhar         ###   ########.fr       */
+/*   Updated: 2024/07/24 19:22:07 by kfukuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,31 +26,24 @@
 # include <stdbool.h>
 # include <limits.h>
 
+# define NUM_CMD 2
+
 typedef struct	s_pipex
 {
+	pid_t	childs[2];
 	int		in_fd;
 	int		out_fd;
-	bool	here_doc;
-	bool	is_invalid_infile;
-	char	**cmd_paths;
+	char	**env;
 	char	***cmd_args;
-	int		cmd_count;
+	size_t	num_cmd;
 }				t_pipex;
 
-typedef enum	s_pipex_error
-{
-	ARGS_ERROR = -1,
-}				t_pipex_error;
-
 // main
-void	ft_init_pipex(t_pipex *data);
-int		ft_check_args(int argc, char **argv, t_pipex *data);
-int		ft_parse_cmds(t_pipex *data);
-int		ft_parse_args(t_pipex *data);
-int		ft_exec(t_pipex *data);
+void	init_pipex(int argc, char **argv, char **env, t_pipex *data);
+void	execute_cmd(t_pipex *data, size_t i, int *pipe_fd);
 int		ft_cleanup(t_pipex *data);
 
 // sub
-void	ft_exit(char *error_msg);
+void	ft_exit(t_pipex *data, char *error_msg);
 
 #endif
