@@ -6,12 +6,11 @@
 /*   By: kfukuhar <kfukuhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 17:00:52 by kfukuhar          #+#    #+#             */
-/*   Updated: 2024/07/31 13:37:38 by kfukuhar         ###   ########.fr       */
+/*   Updated: 2024/07/31 14:34:48 by kfukuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pipex.h"
-//	// TODO: remove it.
 //	while (env[i])
 //	{
 //		if (ft_strnstr(env[i], "PATH", 4))
@@ -38,7 +37,7 @@ static void	fork_and_execute(t_pipex *data, int *pipe_fd)
 	{
 		data->childs[i] = fork();
 		if (data->childs[i] < 0)
-			ft_exit(data, "FORK_ERROR");
+			ft_exit(data, "fork");
 		if (data->childs[i] == 0)
 			execute_cmd(data, i, pipe_fd);
 		i++;
@@ -51,10 +50,10 @@ static void	ft_waitpid(t_pipex *data)
 
 	i = 0;
 	if (waitpid(data->childs[i], NULL, 0) < 0)
-		ft_exit(data, "waitpid: data->childs[0]");
+		ft_exit(data, "waitpid : data->childs[0]");
 	i++;
 	if (waitpid(data->childs[i], &(data->status), 0) < 0)
-		ft_exit(data, "waitpid: data->childs[1]");
+		ft_exit(data, "waitpid : data->childs[1]");
 }
 
 static void	close_pipe_fd(int *pipe_fd)
@@ -69,13 +68,13 @@ int	main(int argc, char **argv, char **env)
 	t_pipex	*data;
 
 	if (argc != 5)
-		ft_exit(NULL, "ARGC_ERROR");
+		ft_exit(NULL, "argc");
 	data = (t_pipex *)malloc(sizeof(t_pipex));
 	if (data == NULL)
-		ft_exit(data, "MALLOC_ERROR : data");
+		ft_exit(data, "malloc : data");
 	init_pipex(argc, argv, env, data);
 	if (pipe(pipe_fd) < 0)
-		ft_exit(data, "PIPE_ERROR");
+		ft_exit(data, "pipe");
 	fork_and_execute(data, pipe_fd);
 	close_pipe_fd(pipe_fd);
 	ft_waitpid(data);
