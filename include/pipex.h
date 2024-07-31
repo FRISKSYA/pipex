@@ -6,7 +6,7 @@
 /*   By: kfukuhar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 17:03:19 by kfukuhar          #+#    #+#             */
-/*   Updated: 2024/07/24 19:22:07 by kfukuhar         ###   ########.fr       */
+/*   Updated: 2024/07/25 15:52:03 by kfukuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,11 @@
 
 # define NUM_CMD 2
 
+typedef enum	s_syserror
+{
+	EXEC_FAILURE = 126,
+}				t_syserror;
+
 typedef struct	s_pipex
 {
 	pid_t	childs[2];
@@ -35,6 +40,7 @@ typedef struct	s_pipex
 	int		out_fd;
 	char	**env;
 	char	***cmd_args;
+	int		status;
 	size_t	num_cmd;
 }				t_pipex;
 
