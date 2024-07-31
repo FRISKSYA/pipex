@@ -6,7 +6,7 @@
 /*   By: kfukuhar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 18:37:18 by kfukuhar          #+#    #+#             */
-/*   Updated: 2024/07/24 17:57:55 by kfukuhar         ###   ########.fr       */
+/*   Updated: 2024/07/25 17:45:26 by kfukuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,5 @@ void	init_pipex(int argc, char **argv, char **env, t_pipex *data)
 	if (out_fd < 0)
 		ft_exit(data, "OPEN_ERROR : out_fd");
 	data->out_fd = out_fd;
+	data->status = 0;
 }
