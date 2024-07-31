@@ -6,11 +6,18 @@
 /*   By: kfukuhar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 17:32:11 by kfukuhar          #+#    #+#             */
-/*   Updated: 2024/07/31 14:21:39 by kfukuhar         ###   ########.fr       */
+/*   Updated: 2024/07/31 16:03:12 by kfukuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pipex.h"
+
+// TODO: dev
+static void	execve_relative_path(char **cmd_args, char **env)
+{
+	write(2, cmd_args, 1024);
+	write(2, env, 1024);
+}
 
 static void	exec_cmd_start(t_pipex *data, int *pipe_fd)
 {
@@ -26,7 +33,10 @@ static void	exec_cmd_start(t_pipex *data, int *pipe_fd)
 	close(data->in_fd);
 	if (access(data->cmd_args[0][0], X_OK) != 0)
 		ft_exit(data, "access : data->cmd_args[0][0]");
-	execve(data->cmd_args[0][0], data->cmd_args[0], data->env);
+	if (is_full_path((const char *)data->cmd_args[0][0]))
+		execve(data->cmd_args[0][0], data->cmd_args[0], data->env);
+	else
+		execve_relative_path(data->cmd_args[0], data->env);
 	data->status = EXEC_FAILURE;
 	ft_exit(data, "execve : exec_cmd_start");
 }
@@ -45,7 +55,10 @@ static void	exec_cmd_end(t_pipex *data, int *pipe_fd)
 	close(data->out_fd);
 	if (access(data->cmd_args[1][0], X_OK) != 0)
 		ft_exit(data, "access : data->cmd_args[1][0]");
-	execve(data->cmd_args[1][0], data->cmd_args[1], data->env);
+	if (is_full_path((const char *)data->cmd_args[1][0]))
+		execve(data->cmd_args[1][0], data->cmd_args[1], data->env);
+	else
+		execve_relative_path(data->cmd_args[1], data->env);
 	data->status = EXEC_FAILURE;
 	ft_exit(data, "execve : exec_cmd_end");
 }
