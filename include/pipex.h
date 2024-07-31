@@ -6,7 +6,7 @@
 /*   By: kfukuhar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 17:03:19 by kfukuhar          #+#    #+#             */
-/*   Updated: 2024/07/31 15:58:24 by kfukuhar         ###   ########.fr       */
+/*   Updated: 2024/07/31 17:57:42 by kfukuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,7 @@ int		ft_cleanup(t_pipex *data);
 // sub
 void	ft_exit(t_pipex *data, char *error_msg);
 bool	is_full_path(const char *path);
+void	execve_relative_path(char **cmd_args, char **env);
+void	execve_absolute_path(char **cmd_args, char **env);
 
 #endif

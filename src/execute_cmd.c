@@ -5,69 +5,56 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: kfukuhar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/23 17:32:11 by kfukuhar          #+#    #+#             */
-/*   Updated: 2024/07/31 16:03:12 by kfukuhar         ###   ########.fr       */
+/*   Created: 2024/07/31 17:54:32 by kfukuhar          #+#    #+#             */
+/*   Updated: 2024/07/31 18:13:47 by kfukuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pipex.h"
 
-// TODO: dev
-static void	execve_relative_path(char **cmd_args, char **env)
+static void	free_split(char **str)
 {
-	write(2, cmd_args, 1024);
-	write(2, env, 1024);
+	size_t	i;
+	
+	i = 0;
+	while (str[i])
+		free(str[i++]);
+	free(str);
 }
 
-static void	exec_cmd_start(t_pipex *data, int *pipe_fd)
+static char	**get_paths(char **env)
 {
-	close(pipe_fd[0]);
-	close(STDOUT_FILENO);
-	if (dup2(pipe_fd[1], STDOUT_FILENO) < 0)
-		ft_exit(data, "dup2 : exec_cmd_start, pipe_fd[1]");
-	close(pipe_fd[1]);
-	if (data->in_fd < 0)
-		ft_exit(data, "open: in_fd");
-	if (dup2(data->in_fd, STDIN_FILENO) < 0)
-		ft_exit(data, "dup2 : exec_cmd_start, in_fd");
-	close(data->in_fd);
-	if (access(data->cmd_args[0][0], X_OK) != 0)
-		ft_exit(data, "access : data->cmd_args[0][0]");
-	if (is_full_path((const char *)data->cmd_args[0][0]))
-		execve(data->cmd_args[0][0], data->cmd_args[0], data->env);
-	else
-		execve_relative_path(data->cmd_args[0], data->env);
-	data->status = EXEC_FAILURE;
-	ft_exit(data, "execve : exec_cmd_start");
+	size_t	i;
+
+	i = 0;
+	while (env[i])
+	{
+		if (ft_strnstr(env[i], "PATH=", 5))
+		{
+			env[i] += ft_strlen("PATH=");
+			return (ft_split(env[i], ':'));
+		}
+		i++;
+	}
+	return (NULL);
 }
 
-static void	exec_cmd_end(t_pipex *data, int *pipe_fd)
+void	execve_relative_path(char **cmd_args, char **env)
 {
-	close(pipe_fd[1]);
-	close(STDIN_FILENO);
-	if (dup2(pipe_fd[0], STDIN_FILENO) < 0)
-		ft_exit(data, "dup2 : exec_cmd_end. pipe_fd[0]");
-	close(pipe_fd[0]);
-	if (data->out_fd < 0)
-		ft_exit(data, "open : out_fd");
-	if (dup2(data->out_fd, STDOUT_FILENO) < 0)
-		ft_exit(data, "dup2 : exec_cmd_end, out_fd");
-	close(data->out_fd);
-	if (access(data->cmd_args[1][0], X_OK) != 0)
-		ft_exit(data, "access : data->cmd_args[1][0]");
-	if (is_full_path((const char *)data->cmd_args[1][0]))
-		execve(data->cmd_args[1][0], data->cmd_args[1], data->env);
-	else
-		execve_relative_path(data->cmd_args[1], data->env);
-	data->status = EXEC_FAILURE;
-	ft_exit(data, "execve : exec_cmd_end");
+	char	**paths;
+
+	paths = get_paths(env);
+	if (!cmd_args)
+		return ;
+	// TODO: remove it. just debug.
+	size_t	j;
+	j = 0;
+	while (paths && paths[j])
+	{
+		ft_printf("path[%d] : %s\n", (int)j, paths[j]);
+		j++;
+	}
+	free_split(paths);
 }
 
-void	execute_cmd(t_pipex *data, size_t i, int *pipe_fd)
-{
-	if (i == 0)
-		exec_cmd_start(data, pipe_fd);
-	else if (i == 1)
-		exec_cmd_end(data, pipe_fd);
-	exit(EXIT_SUCCESS);
-}
+void	execve_absolute_path(char **cmd_args, char **env);
