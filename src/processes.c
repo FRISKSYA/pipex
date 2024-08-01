@@ -6,7 +6,7 @@
 /*   By: kfukuhar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 17:32:11 by kfukuhar          #+#    #+#             */
-/*   Updated: 2024/07/31 17:59:21 by kfukuhar         ###   ########.fr       */
+/*   Updated: 2024/07/31 18:41:51 by kfukuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,12 @@ static void	exec_cmd_start(t_pipex *data, int *pipe_fd)
 	if (dup2(data->in_fd, STDIN_FILENO) < 0)
 		ft_exit(data, "dup2 : exec_cmd_start, in_fd");
 	close(data->in_fd);
-	// TODO: mv to execve func
-	//if (access(data->cmd_args[0][0], X_OK) != 0)
-		//ft_exit(data, "access : data->cmd_args[0][0]");
 	if (is_full_path((const char *)data->cmd_args[0][0]))
+	{
+		if (access(data->cmd_args[0][0], X_OK) != 0)
+			ft_exit(data, "access : data->cmd_args[0][0]");
 		execve(data->cmd_args[0][0], data->cmd_args[0], data->env);
+	}
 	else
 		execve_relative_path(data->cmd_args[0], data->env);
 	data->status = EXEC_FAILURE;
@@ -47,11 +48,12 @@ static void	exec_cmd_end(t_pipex *data, int *pipe_fd)
 	if (dup2(data->out_fd, STDOUT_FILENO) < 0)
 		ft_exit(data, "dup2 : exec_cmd_end, out_fd");
 	close(data->out_fd);
-	// TODO: mv to execve func
-	//if (access(data->cmd_args[1][0], X_OK) != 0)
-	//	ft_exit(data, "access : data->cmd_args[1][0]");
 	if (is_full_path((const char *)data->cmd_args[1][0]))
+	{
+		if (access(data->cmd_args[1][0], X_OK) != 0)
+			ft_exit(data, "access : data->cmd_args[1][0]");
 		execve(data->cmd_args[1][0], data->cmd_args[1], data->env);
+	}
 	else
 		execve_relative_path(data->cmd_args[1], data->env);
 	data->status = EXEC_FAILURE;

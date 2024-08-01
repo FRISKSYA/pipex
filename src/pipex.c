@@ -6,7 +6,7 @@
 /*   By: kfukuhar <kfukuhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 17:00:52 by kfukuhar          #+#    #+#             */
-/*   Updated: 2024/07/31 15:20:51 by kfukuhar         ###   ########.fr       */
+/*   Updated: 2024/08/01 17:16:04 by kfukuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ static void	fork_and_execute(t_pipex *data, int *pipe_fd)
 	}
 }
 
+// TODO: waitpidに失敗したときにしかexitステータスが更新されない
 static void	ft_waitpid(t_pipex *data)
 {
 	size_t	i;
