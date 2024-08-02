@@ -6,7 +6,7 @@
 /*   By: kfukuhar <kfukuhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 17:00:52 by kfukuhar          #+#    #+#             */
-/*   Updated: 2024/08/01 17:16:04 by kfukuhar         ###   ########.fr       */
+/*   Updated: 2024/08/02 16:17:27 by kfukuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ int	main(int argc, char **argv, char **env)
 	fork_and_execute(data, pipe_fd);
 	close_pipe_fd(pipe_fd);
 	ft_waitpid(data);
+	close(data->in_fd);
+	close(data->out_fd);
 	ft_cleanup(data);
 	return (EXIT_SUCCESS);
 }

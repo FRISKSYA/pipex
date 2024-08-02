@@ -6,7 +6,7 @@
 /*   By: kfukuhar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 17:54:32 by kfukuhar          #+#    #+#             */
-/*   Updated: 2024/08/01 18:05:51 by kfukuhar         ###   ########.fr       */
+/*   Updated: 2024/08/02 11:39:18 by kfukuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static int	free_split(char **str)
 {
 	size_t	i;
-	
+
 	i = 0;
 	while (str[i])
 		free(str[i++]);
@@ -43,11 +43,14 @@ static char	**get_paths(char **env)
 static char	*join_dir_cmd(char *prefix, char *cmd)
 {
 	char	*prev;
+	char	*cmd_path;
 
 	prev = ft_strjoin(prefix, "/");
 	if (prev == NULL)
 		return (NULL);
-	return (ft_strjoin(prev, cmd));
+	cmd_path = ft_strjoin(prev, cmd);
+	free(prev);
+	return (cmd_path);
 }
 
 void	execve_relative_path(char **cmd_args, char **env)
@@ -72,12 +75,8 @@ void	execve_relative_path(char **cmd_args, char **env)
 			free(cmd_path);
 			exit(EXIT_FAILURE);
 		}
-		//write(2, "hello\n", 6);
 		free(cmd_path);
 		i++;
 	}
 	free_split(paths);
-	write(2, "command not found\n", 19);
-	exit(EXIT_FAILURE);
 }
-

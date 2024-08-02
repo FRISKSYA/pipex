@@ -6,7 +6,7 @@
 /*   By: kfukuhar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 17:32:11 by kfukuhar          #+#    #+#             */
-/*   Updated: 2024/07/31 18:41:51 by kfukuhar         ###   ########.fr       */
+/*   Updated: 2024/08/02 14:06:55 by kfukuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ static void	exec_cmd_start(t_pipex *data, int *pipe_fd)
 	else
 		execve_relative_path(data->cmd_args[0], data->env);
 	data->status = EXEC_FAILURE;
-	ft_exit(data, "execve : exec_cmd_start");
+	write(2, "command not found\n", 19);
+	ft_exit(data, NULL);
 }
 
 static void	exec_cmd_end(t_pipex *data, int *pipe_fd)
@@ -57,7 +58,8 @@ static void	exec_cmd_end(t_pipex *data, int *pipe_fd)
 	else
 		execve_relative_path(data->cmd_args[1], data->env);
 	data->status = EXEC_FAILURE;
-	ft_exit(data, "execve : exec_cmd_end");
+	write(2, "command not found\n", 19);
+	ft_exit(data, NULL);
 }
 
 void	execute_cmd(t_pipex *data, size_t i, int *pipe_fd)
