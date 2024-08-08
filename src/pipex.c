@@ -11,13 +11,6 @@
 /* ************************************************************************** */
 
 #include "../include/pipex.h"
-//	while (env[i])
-//	{
-//		if (ft_strnstr(env[i], "PATH", 4))
-//			ft_printf("env[%d] : %s\n", i, env[i]);
-//		i++;
-//	}
-
 // TODO: compare with bash, its probably need not to exit.
 // STEPS:
 //	1: init_pipex
@@ -26,7 +19,6 @@
 //	3: execute cmds
 //	3.1 : write outfile
 //	4: cleanup_pipex
-//int	main(int argc, char **argv) //, const char ** const env)
 
 static void	fork_and_execute(t_pipex *data, int *pipe_fd)
 {

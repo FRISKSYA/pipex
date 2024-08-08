@@ -12,6 +12,12 @@
 
 #include "../include/pipex.h"
 
+// NOTE:
+// 1 : ctl resorces
+// 2 : is_full_path?
+// 	2.1 : execve full path
+// 	2.2 : execve relative path
+// 3 : error handlings
 static void	exec_cmd_start(t_pipex *data, int *pipe_fd)
 {
 	close(pipe_fd[0]);
