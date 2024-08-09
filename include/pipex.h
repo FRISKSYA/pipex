@@ -26,32 +26,17 @@
 # include <sys/wait.h>
 # include <unistd.h>
 
-# define NUM_CMD 2
-
-typedef enum s_syserror
-{
-	EXEC_FAILURE = 126,
-}			t_syserror;
-
 typedef struct s_pipex
 {
-	pid_t	childs[2];
-	int		in_fd;
-	int		out_fd;
+	pid_t	*childs;
+	int		pipe_fd[2];
 	char	**env;
 	char	***cmd_args;
 	int		status;
-	size_t	num_cmd;
 }			t_pipex;
 
-// main
-void		init_pipex(int argc, char **argv, char **env, t_pipex *data);
-void		execute_cmd(t_pipex *data, size_t i, int *pipe_fd);
-int			ft_cleanup(t_pipex *data);
-
-// sub
-void		ft_exit(t_pipex *data, char *error_msg);
-bool		is_full_path(const char *path);
-void		execve_relative_path(char **cmd_args, char **env);
+// exit funcs
+void	ft_cleanup(t_pipex *data);
+void	ft_exit(t_pipex *data, char *error_msg);
 
 #endif

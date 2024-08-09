@@ -1,36 +1,43 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_exit.c                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: kfukuhar <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/08 19:10:12 by kfukuhar          #+#    #+#             */
-/*   Updated: 2024/08/02 11:30:56 by kfukuhar         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+// TODO: Stdheader
 
 #include "../include/pipex.h"
 
-// NOTE: error_msg ex)
-// "{function name} : {...sub info}"
+static void	cleanup_cmd_args(char ***cmd_args)
+{
+	if (!cmd_args)
+		return ;
+	else
+		perror("just debug, cleanup_cmd_args");
+}
+
+void	ft_cleanup(t_pipex *data)
+{
+	// TODO: close FDs
+	if (data && data->cmd_args)
+		cleanup_cmd_args(data->cmd_args);
+	if (data && data->childs)
+		free(data->childs);
+	if (data)
+		free(data);
+}
+
 void	ft_exit(t_pipex *data, char *error_msg)
 {
 	int	status;
 
-	status = 0;
-	if (data == NULL)
+	if (!data && !error_msg)
+		exit(EXIT_FAILURE);
+	if (!data && error_msg)
 	{
 		perror(error_msg);
 		exit(EXIT_FAILURE);
 	}
-	if (WIFEXITED(data->status))
-		status = WEXITSTATUS(data->status);
+	status = data->status;
 	ft_cleanup(data);
 	if (error_msg)
 		perror(error_msg);
-	if (status)
-		exit(status);
+	if (WIFEXITED(status))
+		exit(WEXITSTATUS(status));
 	else
 		exit(EXIT_FAILURE);
 }
