@@ -6,7 +6,7 @@
 /*   By: kfukuhar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 14:33:34 by kfukuhar          #+#    #+#             */
-/*   Updated: 2024/08/10 19:30:50 by kfukuhar         ###   ########.fr       */
+/*   Updated: 2024/08/10 20:08:41 by kfukuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static void	do_cmd(t_pipex *data, size_t i)
 	{
 		in_fd = open(data->argv[1], O_RDONLY);
 		if (in_fd < 0)
-			ft_exit(data, "do_cmd : open");
+			ft_exit(data, data->argv[1]);
 		ctl_fds_1(data, in_fd);
 		exec_cmd(data, i);
 	}
@@ -67,7 +67,7 @@ static void	do_cmd(t_pipex *data, size_t i)
 	{
 		out_fd = open(data->argv[4], O_WRONLY | O_CREAT | O_TRUNC, 0644);
 		if (out_fd < 0)
-			ft_exit(data, "do_cmd : open");
+			ft_exit(data, data->argv[4]);
 		ctl_fds_2(data, out_fd);
 		exec_cmd(data, i);
 	}
