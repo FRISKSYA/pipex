@@ -6,7 +6,7 @@
 /*   By: kfukuhar <kfukuhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 17:03:19 by kfukuhar          #+#    #+#             */
-/*   Updated: 2024/08/10 14:46:52 by kfukuhar         ###   ########.fr       */
+/*   Updated: 2024/08/10 17:04:08 by kfukuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,11 @@ typedef struct s_pipex
 
 // execute_cmd funcs
 void	execute_cmd(t_pipex *data);
-void	do_cmd(t_pipex *data, size_t i);
+void	execve_full_path(char **cmd_args, char **env);
+void	execve_relative_path(char **cmd_args, char **env);
+
+// support funcs;
+bool	is_full_path(const char *path);
 
 // exit funcs
 void	ft_cleanup(t_pipex *data);

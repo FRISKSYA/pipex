@@ -6,32 +6,38 @@
 /*   By: kfukuhar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 14:42:45 by kfukuhar          #+#    #+#             */
-/*   Updated: 2024/08/10 15:05:11 by kfukuhar         ###   ########.fr       */
+/*   Updated: 2024/08/10 17:23:24 by kfukuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pipex.h"
 
-static void	exec_cmd(t_pipex *data, size_t i)
+bool	is_full_path(const char *path)
 {
-	if (is_full_path((const char *)data->cmd_args[i][0]))
-		execve_full_path(data->cmd_args[i], data->env);
+	if (!path)
+		return (false);
+	if (
+		(ft_strncmp(path, "~/", 2) == 0)
+		|| (ft_strncmp(path, "/", 1) == 0)
+		|| (ft_strncmp(path, "../", 3) == 0)
+		|| (ft_strncmp(path, "./", 2) == 0)
+	)
+		return (true);
 	else
-		execve_relative_path(data->cmd_args[i], data->env);
+		return (false);
 }
 
-void	do_cmd(t_pipex *data, size_t i)
+// TODO: dev
+void	execve_relative_path(char **cmd_args, char **env)
 {
-	if (i == 0)
-	{
-		open_files_1(data);
-		ctl_fds_1(data);
-		exec_cmd(data, i);
-	}
-	else if (i == 1)
-	{
-		open_files_2(data);
-		ctl_fds_2(data);
-		exec_cmd(data, i);
-	}
+	if (access(cmd_args[0], X_OK) != 0)
+		return ;
+	execve(cmd_args[0], cmd_args, env);
+}
+
+void	execve_full_path(char **cmd_args, char **env)
+{
+	if (access(cmd_args[0], X_OK) != 0)
+		return ;
+	execve(cmd_args[0], cmd_args, env);
 }

@@ -6,7 +6,7 @@
 /*   By: kfukuhar <kfukuhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 17:00:52 by kfukuhar          #+#    #+#             */
-/*   Updated: 2024/08/10 14:52:28 by kfukuhar         ###   ########.fr       */
+/*   Updated: 2024/08/10 17:22:25 by kfukuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,14 +75,23 @@ static void	ft_waitpid(t_pipex *data)
 		ft_exit(data, "ft_waitpid : data->childs[1]");
 }
 
-// STEPS:
+static void	close_pipe_fd(int *pipe_fd)
+{
+	close(pipe_fd[0]);
+	close(pipe_fd[1]);
+}
+
 int	main(int argc, char **argv, char **env)
 {
 	t_pipex	*data;
+	int		status;
 
 	init_pipex(&data, argc, argv, env);
 	execute_cmd(data);
+	close_pipe_fd(data->pipe_fd);
 	ft_waitpid(data);
+	status = data->status;
 	ft_cleanup(data);
+	//TODO: apply status
 	return (EXIT_SUCCESS);
 }
