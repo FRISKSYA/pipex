@@ -6,7 +6,7 @@
 /*   By: kfukuhar <kfukuhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 17:00:52 by kfukuhar          #+#    #+#             */
-/*   Updated: 2024/08/10 17:22:25 by kfukuhar         ###   ########.fr       */
+/*   Updated: 2024/08/10 17:46:34 by kfukuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,5 @@ int	main(int argc, char **argv, char **env)
 	ft_waitpid(data);
 	status = data->status;
 	ft_cleanup(data);
-	//TODO: apply status
 	return (EXIT_SUCCESS);
 }

@@ -6,11 +6,22 @@
 /*   By: kfukuhar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 17:23:00 by kfukuhar          #+#    #+#             */
-/*   Updated: 2024/08/10 17:23:04 by kfukuhar         ###   ########.fr       */
+/*   Updated: 2024/08/10 18:05:12 by kfukuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pipex.h"
+
+void	print_command_not_found(char *cmd)
+{
+	char	*msg;
+
+	msg = ft_strjoin(cmd, " : command not found\n");
+	if (!msg)
+		return ;
+	ft_putstr_fd(msg, STDERR_FILENO);
+	free(msg);
+}
 
 void	cleanup_cmd_args(char ***cmd_args)
 {

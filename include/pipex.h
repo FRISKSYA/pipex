@@ -6,7 +6,7 @@
 /*   By: kfukuhar <kfukuhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 17:03:19 by kfukuhar          #+#    #+#             */
-/*   Updated: 2024/08/10 17:04:08 by kfukuhar         ###   ########.fr       */
+/*   Updated: 2024/08/10 18:35:17 by kfukuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,11 @@ void	execve_full_path(char **cmd_args, char **env);
 void	execve_relative_path(char **cmd_args, char **env);
 
 // support funcs;
+bool	is_home_path(const char *path);
+char	*join_dir_cmd(char *prefix, char *cmd);
+void	replace_home_path(char **path, char **env);
 bool	is_full_path(const char *path);
+void	print_command_not_found(char *cmd);
 
 // exit funcs
 void	ft_cleanup(t_pipex *data);

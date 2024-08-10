@@ -6,7 +6,7 @@
 /*   By: kfukuhar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 14:33:34 by kfukuhar          #+#    #+#             */
-/*   Updated: 2024/08/10 17:01:02 by kfukuhar         ###   ########.fr       */
+/*   Updated: 2024/08/10 18:30:12 by kfukuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,13 @@ static void	ctl_fds_2(t_pipex *data, int out_fd)
 static void	exec_cmd(t_pipex *data, size_t i)
 {
 	// TODO: extend "~" func
+	if (is_home_path((const char *)data->cmd_args[i][0]))
+		replace_home_path(&data->cmd_args[i][0], data->env);
 	if (is_full_path((const char *)data->cmd_args[i][0]))
 		execve_full_path(data->cmd_args[i], data->env);
 	else
 		execve_relative_path(data->cmd_args[i], data->env);
-	// TODO : wrap this literal
-	write(2, "command not found\n", 19);
+	print_command_not_found(data->cmd_args[i][0]);
 	ft_exit(data, NULL);
 }
 
