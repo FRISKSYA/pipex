@@ -2,12 +2,29 @@
 
 #include "../include/pipex.h"
 
-static void	cleanup_cmd_args(char ***cmd_args)
+void	cleanup_cmd_args(char ***cmd_args)
 {
+	size_t	i;
+	size_t	j;
+
 	if (!cmd_args)
 		return ;
 	else
-		perror("just debug, cleanup_cmd_args");
+	{
+		i = 0;
+		while (cmd_args[i])
+		{
+			j = 0;
+			while (cmd_args[i][j])
+			{
+				free(cmd_args[i][j]);
+				j++;
+			}
+			free(cmd_args[i]);
+			i++;
+		}
+	}
+	free(cmd_args);
 }
 
 void	ft_cleanup(t_pipex *data)

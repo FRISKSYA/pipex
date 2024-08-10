@@ -6,18 +6,36 @@
 /*   By: kfukuhar <kfukuhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 17:00:52 by kfukuhar          #+#    #+#             */
-/*   Updated: 2024/08/02 16:17:27 by kfukuhar         ###   ########.fr       */
+/*   Updated: 2024/08/10 14:07:00 by kfukuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pipex.h"
 
-// TODO: dev
-static int	fill_cmd_args(char ***cmd_args, char **argv)
+static char	***split_cmd_args(char **argv)
 {
-	if (!cmd_args && !argv)
-		perror("just debug\n");
-	return (EXIT_SUCCESS);
+	size_t	i;
+	char	***cmd_args;
+
+	// TODO: just debug msg.
+	if (!argv)
+		perror("fill_cmd_args : argv is NULL.\n");
+	cmd_args = (char ***)malloc(3 * sizeof(char **));
+	if (!cmd_args)
+		return (NULL);
+	i = 0;
+	while (i < 2)
+	{
+		cmd_args[i] = ft_split(argv[i + 2], ' ');
+		if (cmd_args[i] == NULL)
+		{
+			cleanup_cmd_args(cmd_args);
+			return (NULL);
+		}
+		i++;
+	}
+	cmd_args[i] = NULL;
+	return (cmd_args);
 }
 
 static void	init_pipex(t_pipex **data, int argc, char **argv, char **env)
@@ -25,7 +43,7 @@ static void	init_pipex(t_pipex **data, int argc, char **argv, char **env)
 	size_t	i;
 
 	if (argc != 5)
-		ft_exit(NULL, "init_pipex : must be 5.");
+		ft_exit(NULL, "init_pipex : args must be 5.");
 	*data = (t_pipex *)malloc(sizeof(t_pipex));
 	if (!(*data))
 		ft_exit(NULL, "init_pipex : data is NULL.");
@@ -37,9 +55,9 @@ static void	init_pipex(t_pipex **data, int argc, char **argv, char **env)
 		(*data)->childs[i++] = 0;
 	(*data)->env = env;
 	// TODO: remove it;
-	(*data)->cmd_args = NULL;
-	if (fill_cmd_args((*data)->cmd_args, argv) != EXIT_SUCCESS)
-		ft_exit(*data, "init_pipex : fill_cmd_args is failure.");
+	(*data)->cmd_args = split_cmd_args(argv);
+	if (!(*data)->cmd_args)
+		ft_exit(*data, "init_pipex : data->cmd_args is NULL.");
 	(*data)->status = 0;
 }
 

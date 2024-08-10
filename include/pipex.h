@@ -6,7 +6,7 @@
 /*   By: kfukuhar <kfukuhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 17:03:19 by kfukuhar          #+#    #+#             */
-/*   Updated: 2024/08/02 13:59:44 by kfukuhar         ###   ########.fr       */
+/*   Updated: 2024/08/10 13:51:08 by kfukuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,6 @@ typedef struct s_pipex
 // exit funcs
 void	ft_cleanup(t_pipex *data);
 void	ft_exit(t_pipex *data, char *error_msg);
+void	cleanup_cmd_args(char ***cmd_args);
 
 #endif
