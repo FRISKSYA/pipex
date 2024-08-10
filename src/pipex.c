@@ -6,7 +6,7 @@
 /*   By: kfukuhar <kfukuhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 17:00:52 by kfukuhar          #+#    #+#             */
-/*   Updated: 2024/08/10 17:46:34 by kfukuhar         ###   ########.fr       */
+/*   Updated: 2024/08/10 20:19:15 by kfukuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,6 @@ static char	***split_cmd_args(char **argv)
 	size_t	i;
 	char	***cmd_args;
 
-	// TODO: just debug msg.
-	if (!argv)
-		perror("fill_cmd_args : argv is NULL.\n");
 	cmd_args = (char ***)malloc(3 * sizeof(char **));
 	if (!cmd_args)
 		return (NULL);

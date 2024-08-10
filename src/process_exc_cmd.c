@@ -6,7 +6,7 @@
 /*   By: kfukuhar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 14:42:45 by kfukuhar          #+#    #+#             */
-/*   Updated: 2024/08/10 20:04:37 by kfukuhar         ###   ########.fr       */
+/*   Updated: 2024/08/10 20:22:01 by kfukuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	execve_relative_path(char **cmd_args, char **env)
 	char	**paths;
 	char	*cmd_path;
 
-	if (!cmd_args)
+	if (!cmd_args || !(*cmd_args))
 		return ;
 	paths = get_paths(env);
 	i = 0;

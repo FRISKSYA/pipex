@@ -6,7 +6,7 @@
 /*   By: kfukuhar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 17:23:00 by kfukuhar          #+#    #+#             */
-/*   Updated: 2024/08/10 18:05:12 by kfukuhar         ###   ########.fr       */
+/*   Updated: 2024/08/10 20:18:35 by kfukuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ void	cleanup_cmd_args(char ***cmd_args)
 
 void	ft_cleanup(t_pipex *data)
 {
-	// TODO: close FDs
 	if (data && data->cmd_args)
 		cleanup_cmd_args(data->cmd_args);
 	if (data && data->childs)
