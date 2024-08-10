@@ -6,7 +6,7 @@
 /*   By: kfukuhar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 17:23:00 by kfukuhar          #+#    #+#             */
-/*   Updated: 2024/08/10 20:18:35 by kfukuhar         ###   ########.fr       */
+/*   Updated: 2024/08/10 22:01:28 by kfukuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ void	ft_cleanup(t_pipex *data)
 		free(data);
 }
 
+// FIXME: exit($?) must be change
+// TODO: data->status fill a value of error code if exit.
 void	ft_exit(t_pipex *data, char *error_msg)
 {
 	int	status;
@@ -77,8 +79,5 @@ void	ft_exit(t_pipex *data, char *error_msg)
 	ft_cleanup(data);
 	if (error_msg)
 		perror(error_msg);
-	if (WIFEXITED(status))
-		exit(WEXITSTATUS(status));
-	else
-		exit(EXIT_FAILURE);
+	exit(status);
 }

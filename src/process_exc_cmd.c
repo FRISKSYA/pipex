@@ -6,7 +6,7 @@
 /*   By: kfukuhar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 14:42:45 by kfukuhar          #+#    #+#             */
-/*   Updated: 2024/08/10 20:22:01 by kfukuhar         ###   ########.fr       */
+/*   Updated: 2024/08/10 22:16:09 by kfukuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,12 +68,18 @@ void	execve_relative_path(char **cmd_args, char **env)
 	free_split(paths);
 }
 
-void	execve_full_path(char **cmd_args, char **env)
+int	execve_full_path(char **cmd_args, char **env)
 {
+	if (access(cmd_args[0], F_OK) != 0)
+	{
+		perror(cmd_args[0]);
+		return (CMD_NOT_FOUND);
+	}
 	if (access(cmd_args[0], X_OK) != 0)
 	{
 		perror(cmd_args[0]);
-		return ;
+		return (CMD_NO_PERMISSION);
 	}
 	execve(cmd_args[0], cmd_args, env);
+	return (EXIT_FAILURE);
 }

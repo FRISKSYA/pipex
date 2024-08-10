@@ -6,7 +6,7 @@
 /*   By: kfukuhar <kfukuhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 17:00:52 by kfukuhar          #+#    #+#             */
-/*   Updated: 2024/08/10 20:19:15 by kfukuhar         ###   ########.fr       */
+/*   Updated: 2024/08/10 21:57:49 by kfukuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,16 +60,20 @@ static void	init_pipex(t_pipex **data, int argc, char **argv, char **env)
 		ft_exit(*data, "init_pipex : pipe is failure.");
 }
 
-static void	ft_waitpid(t_pipex *data)
+static int	ft_waitpid(t_pipex *data)
 {
 	size_t	i;
+	int		status;
 
 	i = 0;
 	if (waitpid(data->childs[i], NULL, 0) < 0)
 		ft_exit(data, "ft_waitpid : data->childs[0]");
 	i++;
-	if (waitpid(data->childs[i], &(data->status), 0) < 0)
+	if (waitpid(data->childs[i], &status, 0) < 0)
 		ft_exit(data, "ft_waitpid : data->childs[1]");
+	if (WIFEXITED(status))
+		return (WEXITSTATUS(status));
+	return (EXIT_SUCCESS);
 }
 
 static void	close_pipe_fd(int *pipe_fd)
@@ -86,8 +90,7 @@ int	main(int argc, char **argv, char **env)
 	init_pipex(&data, argc, argv, env);
 	execute_cmd(data);
 	close_pipe_fd(data->pipe_fd);
-	ft_waitpid(data);
-	status = data->status;
+	status = ft_waitpid(data);
 	ft_cleanup(data);
-	return (EXIT_SUCCESS);
+	return (status);
 }

@@ -6,7 +6,7 @@
 /*   By: kfukuhar <kfukuhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 17:03:19 by kfukuhar          #+#    #+#             */
-/*   Updated: 2024/08/10 18:35:17 by kfukuhar         ###   ########.fr       */
+/*   Updated: 2024/08/10 22:12:33 by kfukuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,12 @@
 # include <sys/wait.h>
 # include <unistd.h>
 
+typedef enum s_exit_status
+{
+	CMD_NO_PERMISSION = 126,
+	CMD_NOT_FOUND = 127,
+}			t_exit_status;
+
 typedef struct s_pipex
 {
 	char	**argv;
@@ -38,7 +44,7 @@ typedef struct s_pipex
 
 // execute_cmd funcs
 void	execute_cmd(t_pipex *data);
-void	execve_full_path(char **cmd_args, char **env);
+int		execve_full_path(char **cmd_args, char **env);
 void	execve_relative_path(char **cmd_args, char **env);
 
 // support funcs;

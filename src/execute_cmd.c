@@ -6,7 +6,7 @@
 /*   By: kfukuhar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 14:33:34 by kfukuhar          #+#    #+#             */
-/*   Updated: 2024/08/10 20:08:41 by kfukuhar         ###   ########.fr       */
+/*   Updated: 2024/08/10 22:15:43 by kfukuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,12 @@ static void	exec_cmd(t_pipex *data, size_t i)
 	if (is_home_path((const char *)data->cmd_args[i][0]))
 		replace_home_path(&data->cmd_args[i][0], data->env);
 	if (is_full_path((const char *)data->cmd_args[i][0]))
-		execve_full_path(data->cmd_args[i], data->env);
+		data->status = execve_full_path(data->cmd_args[i], data->env);
 	else
 	{
 		execve_relative_path(data->cmd_args[i], data->env);
 		print_command_not_found(data->cmd_args[i][0]);
+		data->status = CMD_NOT_FOUND;
 	}
 	ft_exit(data, NULL);
 }
