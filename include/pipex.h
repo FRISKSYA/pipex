@@ -6,7 +6,7 @@
 /*   By: kfukuhar <kfukuhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 17:03:19 by kfukuhar          #+#    #+#             */
-/*   Updated: 2024/08/10 13:51:08 by kfukuhar         ###   ########.fr       */
+/*   Updated: 2024/08/10 14:46:52 by kfukuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,17 @@
 
 typedef struct s_pipex
 {
+	char	**argv;
 	pid_t	*childs;
 	int		pipe_fd[2];
 	char	**env;
 	char	***cmd_args;
 	int		status;
 }			t_pipex;
+
+// execute_cmd funcs
+void	execute_cmd(t_pipex *data);
+void	do_cmd(t_pipex *data, size_t i);
 
 // exit funcs
 void	ft_cleanup(t_pipex *data);

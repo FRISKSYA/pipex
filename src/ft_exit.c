@@ -34,6 +34,10 @@ void	ft_cleanup(t_pipex *data)
 		cleanup_cmd_args(data->cmd_args);
 	if (data && data->childs)
 		free(data->childs);
+	if (data && data->pipe_fd[0])
+		close(data->pipe_fd[0]);
+	if (data && data->pipe_fd[1])
+		close(data->pipe_fd[1]);
 	if (data)
 		free(data);
 }

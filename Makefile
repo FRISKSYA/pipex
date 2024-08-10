@@ -12,7 +12,7 @@ LIBFT_DIR = ./util/libft
 GNL_DIR = ./util/get_next_line
 
 # Source files
-SRCS_FILES = pipex.c ft_exit.c 
+SRCS_FILES = pipex.c ft_exit.c execute_cmd.c process_exc_cmd.c 
 SRCS = $(addprefix $(SRCS_DIR)/, $(SRCS_FILES))
 
 # Object files
