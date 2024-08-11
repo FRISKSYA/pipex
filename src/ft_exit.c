@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kfukuhar <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kfukuhar <kfukuhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 17:23:00 by kfukuhar          #+#    #+#             */
-/*   Updated: 2024/08/10 22:01:28 by kfukuhar         ###   ########.fr       */
+/*   Updated: 2024/08/11 13:13:17 by kfukuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,7 @@ void	ft_cleanup(t_pipex *data)
 		free(data);
 }
 
-// FIXME: exit($?) must be change
-// TODO: data->status fill a value of error code if exit.
+// FIXME: ft_exit(t_pipex *data, char *error_msg, int err_code);
 void	ft_exit(t_pipex *data, char *error_msg)
 {
 	int	status;

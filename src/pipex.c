@@ -6,7 +6,7 @@
 /*   By: kfukuhar <kfukuhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 17:00:52 by kfukuhar          #+#    #+#             */
-/*   Updated: 2024/08/10 21:57:49 by kfukuhar         ###   ########.fr       */
+/*   Updated: 2024/08/11 13:19:29 by kfukuhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,10 @@ static void	init_pipex(t_pipex **data, int argc, char **argv, char **env)
 		ft_exit(*data, "init_pipex : data->cmd_args is NULL.");
 	(*data)->status = 0;
 	if (pipe((*data)->pipe_fd) < 0)
+	{
+		(*data)->status = EXIT_FAILURE;
 		ft_exit(*data, "init_pipex : pipe is failure.");
+	}
 }
 
 static int	ft_waitpid(t_pipex *data)
@@ -67,10 +70,16 @@ static int	ft_waitpid(t_pipex *data)
 
 	i = 0;
 	if (waitpid(data->childs[i], NULL, 0) < 0)
+	{
+		data->status = EXIT_FAILURE;
 		ft_exit(data, "ft_waitpid : data->childs[0]");
+	}
 	i++;
 	if (waitpid(data->childs[i], &status, 0) < 0)
+	{
+		data->status = EXIT_FAILURE;
 		ft_exit(data, "ft_waitpid : data->childs[1]");
+	}
 	if (WIFEXITED(status))
 		return (WEXITSTATUS(status));
 	return (EXIT_SUCCESS);
